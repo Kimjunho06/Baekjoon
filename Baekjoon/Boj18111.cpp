@@ -2,23 +2,28 @@
 
 using namespace std;
 
+//브루트포스
 int main() {
-	int n, m, b;
-	int arr[502][502] = {};
-	int sec = INT_MAX;
-	int maxheight = -1;
+	int n, m, b; // 세로, 가로, 인벤 개수
+	int arr[501][501] = {}; // m n이 1~500까지이기에
+	int sec = 2147000000, maxheight = -1; //
+	int inven = 0, remove = 0; // 인벤토리 1초 삭제 2초
 
+	//가로, 세로, 템 개수 
 	cin >> n >> m >> b;
+	
+	// 가로 세로 값 입력받기
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
-			cin >> arr[i][j];
+			cin >> arr[i][j]; 
 
-	for (int height = 0; height <= 256; height++) {
-		int inven = 0;//인벤에서 꺼내는게 필요한거1초 늘어남
-		int remove = 0;//제거하는 양 2초 늘어남 개수
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				int curheight = arr[i][j] - height;
+	//높이가 256
+	for (int i = 0; i <= 256; i++) {
+		inven = 0;
+		remove = 0;
+		for (int j = 0; j < n; j++) {
+			for (int k = 0; k < m; k++) {
+				int curheight = arr[j][k] - i;
 				if (curheight < 0) inven -= curheight;
 				else remove += curheight;
 			}
@@ -27,10 +32,9 @@ int main() {
 			int ttime = 2 * remove + inven;
 			if (sec >= ttime) {
 				sec = ttime;
-				maxheight = height;
+				maxheight = i;
 			}
 		}
 	}
 	cout << sec << " " << maxheight;
 }
-
