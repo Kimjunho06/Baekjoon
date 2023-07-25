@@ -21,7 +21,7 @@ int main() {
 	for (int i = 0; i <= 256; i++) {
 		inven = 0;
 		remove = 0;
-		for (int j = 0; j < n; j++) {
+		for (int j = 0; j < n; j++) { 
 			for (int k = 0; k < m; k++) {
 				int curheight = arr[j][k] - i;
 				if (curheight < 0) inven -= curheight;
