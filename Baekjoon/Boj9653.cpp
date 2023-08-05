@@ -3,7 +3,6 @@
 using namespace std;
 
 int main() {
-
 	cout << "    8888888888  888    88888" << endl;
 	cout << "   88     88   88 88   88  88" << endl;
 	cout << "    8888  88  88   88  88888" << endl;
