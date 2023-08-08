@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <tuple>
+#include <tuple> // 2tuple => pair
+
 
 using namespace std;
 typedef tuple<int, int, int> edge;
