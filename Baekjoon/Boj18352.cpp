@@ -1,71 +1,59 @@
-//#include <iostream>
-//#include <vector>
-//#include <algorithm>
-//
-//using namespace std;
-//
-//int main() {
-//	ios_base::sync_with_stdio(false);
-//	cin.tie(nullptr); cout.tie(nullptr);
-//
-//	int n, m, k, x;
-//	int cnt = 0, beforeVal = 0;
-//	int minValue, idx = 0;
-//	vector<vector<int>> edge;
-//	vector<int> D;
-//	vector<int> answer;
-//	vector<bool> visited;
-//	
-//	cin >> n >> m >> k >> x;
-//	
-//	edge.resize(m + 1);
-//	visited.resize(n + 1);
-//	D.resize(n + 1);
-//
-//	fill(D.begin(), D.end(), 2147483647);
-//
-//	for (int i = 0; i < m; i++) {
-//		int A, B;
-//		cin >> A >> B;
-//		
-//		edge[A].push_back(B);
-//	}
-//
-//	D[x] = 0;
-//
-//	// 대충 지금 무지성 cnt 올려서 해결이 안됨
-//	while (true)
-//	{
-//		if (cnt == k) break;
-//		cnt++;
-//
-//		minValue = 2147483647;
-//		idx = 0;
-//		for (int i = 1; i <= n; i++) {
-//			if (D[i] < minValue && !visited[i]) {
-//				minValue = D[i];
-//				idx = i;
-//			}
-//		}
-//		
-//		for (int i = 0; i < edge[idx].size(); i++) {
-//			beforeVal = D[edge[idx][i]];
-//			D[edge[idx][i]] = min(D[idx] + 1, D[edge[idx][i]]);
-//			if (cnt == k && D[edge[idx][i]] < beforeVal) {
-//				answer.push_back(edge[idx][i]);
-//			}
-//		}
-//		visited[idx] = true;
-//	}
-//	
-//	sort(answer.begin(), answer.end());
-//
-//	if (answer.empty()) {
-//		cout << -1;
-//	}
-//	else {
-//		for (auto a : answer) {
-//			cout << a << "\n";
-//		}
-//	}
-//}
+#include <stdio.h>
+#include <vector>
+#include <queue>
+using namespace std;
+
+vector <int> V[300001];
+priority_queue <int, vector<int>, greater<int>> Print;
+
+void BFS(int start, int K) {
+	queue <pair<int, int>> Q;
+	bool visited[300001] = { 0, };
+	int now, dis;
+
+	Q.push({ start,0 });
+	visited[start] = true;
+
+	while (!Q.empty()) {
+		// 현재 방문한 도시, 출발 도시 - 현재 도시 간 거리
+		now = Q.front().first, dis = Q.front().second;
+		Q.pop();
+
+		if (dis == K) {
+			Print.push(now);
+			continue; // 거리가 K이상인 도시는 탐색할 필요가 없으므로
+		}
+
+		// 현재 도시와 인접한 도시들
+		for (int i : V[now]) {
+			if (!visited[i]) {
+				Q.push({ i,dis + 1 });
+				// 방문 표시
+				visited[i] = true;
+			}
+		}
+	}
+}
+
+int main() {
+	int N, M, K, X, A, B;
+
+	// input
+	scanf("%d %d %d %d", &N, &M, &K, &X);
+	for (int i = 0; i < M; i++) {
+		scanf("%d %d", &A, &B);
+		V[A].push_back(B);
+	}
+
+	// Find
+	BFS(X, K);
+
+	// print
+	if (Print.empty()) printf("-1"); // 거리가 K인 도시가 없다면
+	while (!Print.empty()) {
+		printf("%d\n", Print.top());
+		Print.pop();
+	}
+
+	return 0;
+}
