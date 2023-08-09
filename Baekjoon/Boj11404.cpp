@@ -1,50 +1,59 @@
-//#include <iostream>
-//#include <vector>
-//#include <climits>
-//
-//using namespace std;
-//
-//int main() {
-//	int n, m;
-//	int a, b, c;
-//	vector<vector<pair<int, int>>> v;
-//	vector<vector<int>> answer;
-//
-//	cin >> n >> m;
-//
-//	v.resize(n + 1);
-//	answer.resize(n + 1);
-//
-//	for (int i = 1; i <= n; i++) {
-//		answer[i].resize(n + 1);
-//	}
-//
-//	for (int i = 0; i < m; i++) {
-//		cin >> a >> b >> c; // a: 시작노드, b: 도착노드, c:가중치
-//
-//		v[a].push_back({ b, c });
-//	}
-//
-//	for (int i = 1; i <= n; i++) {
-//		for (int j = 1; j <= n; j++) {
-//			if (i == j) {
-//				answer[i][j] = 0;
-//			}
-//			else {
-//				answer[i][j] = INT_MAX;
-//			}
-//		}
-//	}
-//
-//	for (int i = 1; i <= n; i++) {
-//		for (int j = 1; j <= n; j++) {
-//			if (answer[i][j] == INT_MAX) {
-//				cout << 0 << " ";
-//			}
-//			else {
-//				cout << answer[i][j] << " ";
-//			}
-//		}
-//		cout << "\n";
-//	}
-//}
+#include <iostream>
+
+using namespace std;
+
+#define endl '\n'
+#define INF 987654321
+#define MAX 101
+
+int n, m;
+int city[MAX][MAX];
+
+void input()
+{
+	cin >> n >> m;
+
+	for (int i = 1; i <= n; ++i)
+		for (int j = 1; j <= n; ++j)
+			city[i][j] = INF;
+
+	for (int i = 0; i < m; ++i)
+	{
+		int st, en, cost;
+		cin >> st >> en >> cost;
+
+		city[st][en] = min(city[st][en], cost);
+	}
+}
+
+void floyd()
+{
+	for (int bridge = 1; bridge <= n; ++bridge)
+		for (int from = 1; from <= n; ++from)
+			for (int to = 1; to <= n; ++to)
+				city[from][to] = min(city[from][to], city[from][bridge] + city[bridge][to]);
+}
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+
+	input();
+	floyd();
+
+	for (int i = 1; i <= n; ++i)
+	{
+		for (int j = 1; j <= n; ++j)
+		{
+			if (i == j || city[i][j] == INF)
+				cout << 0 << ' ';
+			else
+				cout << city[i][j] << ' ';
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
