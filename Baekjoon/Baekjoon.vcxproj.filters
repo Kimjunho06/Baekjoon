@@ -163,13 +163,16 @@
     <ClCompile Include="Boj1717.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
-    <ClCompile Include="Boj4195.cpp">
-      <Filter>Baekjoon</Filter>
-    </ClCompile>
     <ClCompile Include="Boj27433.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
     <ClCompile Include="Boj1463.cpp">
+      <Filter>Baekjoon</Filter>
+    </ClCompile>
+    <ClCompile Include="Boj4095.cpp">
+      <Filter>Baekjoon</Filter>
+    </ClCompile>
+    <ClCompile Include="Boj9095.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
   </ItemGroup>
