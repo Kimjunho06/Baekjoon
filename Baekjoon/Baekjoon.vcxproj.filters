@@ -169,9 +169,6 @@
     <ClCompile Include="Boj1463.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
-    <ClCompile Include="Boj4095.cpp">
-      <Filter>Baekjoon</Filter>
-    </ClCompile>
     <ClCompile Include="Boj9095.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
@@ -179,6 +176,9 @@
       <Filter>Baekjoon</Filter>
     </ClCompile>
     <ClCompile Include="Boj10039.cpp">
+      <Filter>Baekjoon</Filter>
+    </ClCompile>
+    <ClCompile Include="Boj4195.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
   </ItemGroup>
