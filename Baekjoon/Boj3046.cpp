@@ -6,5 +6,5 @@ int main() {
 	long long x, s;
 	cin >> x >> s;
 
-	cout << 2 * s - x;
+	cout << 2 * s - x; //
 }
