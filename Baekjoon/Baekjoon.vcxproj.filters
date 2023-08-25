@@ -16,9 +16,6 @@
     <ClCompile Include="Boj10799.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
-    <ClCompile Include="오픈채팅방_미해결.cpp">
-      <Filter>Programmers</Filter>
-    </ClCompile>
     <ClCompile Include="Boj11866.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
@@ -218,6 +215,12 @@
       <Filter>Baekjoon</Filter>
     </ClCompile>
     <ClCompile Include="Boj1312.cpp">
+      <Filter>Baekjoon</Filter>
+    </ClCompile>
+    <ClCompile Include="Crane.cpp">
+      <Filter>Programmers</Filter>
+    </ClCompile>
+    <ClCompile Include="Boj1629.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
   </ItemGroup>
