@@ -1,59 +1,63 @@
-#include <stdio.h>
-#include <vector>
+#include <iostream>
 #include <queue>
+#include <vector>
+
 using namespace std;
 
-vector <int> V[300001];
-priority_queue <int, vector<int>, greater<int>> Print;
+int n, m, k, x; // 도시의 개수 N, 도로의 개수 M, 거리 정보 K, 출발 도시의 번호 X
 
-void BFS(int start, int K) {
-	queue <pair<int, int>> Q;
-	bool visited[300001] = { 0, };
-	int now, dis;
+void BFS(int n, vector<int>& visited, vector<vector<int>>& v) {
+	queue<int> q;
+	visited[n] = 0;
+	q.push(n);
 
-	Q.push({ start,0 });
-	visited[start] = true;
-
-	while (!Q.empty()) {
-		// 현재 방문한 도시, 출발 도시 - 현재 도시 간 거리
-		now = Q.front().first, dis = Q.front().second;
-		Q.pop();
-
-		if (dis == K) {
-			Print.push(now);
-			continue; // 거리가 K이상인 도시는 탐색할 필요가 없으므로
-		}
-
-		// 현재 도시와 인접한 도시들
-		for (int i : V[now]) {
-			if (!visited[i]) {
-				Q.push({ i,dis + 1 });
-				// 방문 표시
-				visited[i] = true;
+	while (!q.empty())
+	{
+		int i = q.front();
+		q.pop();
+		
+		for (int j = 0; j < v[i].size(); j++) {
+			if (visited[v[i][j]] < 0) {
+				q.push(v[i][j]);
+				visited[v[i][j]] = visited[i] + 1;
 			}
 		}
 	}
 }
 
 int main() {
-	int N, M, K, X, A, B;
+	int fs, se;
+	vector<int> visited;
+	vector<vector<int>> v;	
+	priority_queue<int, vector<int>, greater<int>> pq;
 
-	// input
-	scanf("%d %d %d %d", &N, &M, &K, &X);
-	for (int i = 0; i < M; i++) {
-		scanf("%d %d", &A, &B);
-		V[A].push_back(B);
+	cin >> n >> m >> k >> x;
+
+	visited.resize(n + 1, -1);
+	v.resize(n + 1);
+
+	for (int i = 0; i < m; i++) {
+		cin >> fs >> se;
+		
+		v[fs].push_back(se);
 	}
 
-	// Find
-	BFS(X, K);
+	BFS(x, visited, v);
 
-	// print
-	if (Print.empty()) printf("-1"); // 거리가 K인 도시가 없다면
-	while (!Print.empty()) {
-		printf("%d\n", Print.top());
-		Print.pop();
+	for (int i = 1; i < visited.size(); i++) {
+		if (visited[i] == k) {
+			pq.push(i);
+		}
 	}
 
-	return 0;
+	if (pq.empty()) {
+		cout << -1;
+	}
+	else {
+		while (!pq.empty())
+		{
+			cout << pq.top() << "\n";
+			pq.pop();
+		}
+	}
 }
