@@ -325,5 +325,11 @@
     <ClCompile Include="Boj11170.cpp">
       <Filter>Baekjoon</Filter>
     </ClCompile>
+    <ClCompile Include="Boj11655.cpp">
+      <Filter>Baekjoon</Filter>
+    </ClCompile>
+    <ClCompile Include="Boj5635.cpp">
+      <Filter>Baekjoon</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
